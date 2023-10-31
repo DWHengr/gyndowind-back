@@ -1,0 +1,12 @@
+server:
+  port: 8500
+
+nps:
+  auth-key:
+  host:
+  client-add-url: /client/add
+  client-del-url: /client/del
+  tunnel-get-url: /index/gettunnel
+  tunnel-add-url: /index/add
+  tunnel-edit-url: /index/edit
+  tunnel-del-url: /index/del
