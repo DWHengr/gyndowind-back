@@ -3,6 +3,7 @@ package com.dwh.gyndowindback.nps;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.dwh.gyndowindback.nps.entity.ClientCreate;
 import com.dwh.gyndowindback.nps.entity.Tunnel;
 import com.dwh.gyndowindback.utils.MD5Util;
 import com.dwh.gyndowindback.utils.OkHttpUtils;
@@ -33,6 +34,26 @@ public class NpsService {
         param.put("auth_key", key);
         param.put("timestamp", time + "");
         return param;
+    }
+
+
+    /**
+     * 客户端创建
+     *
+     * @param clientCreate
+     */
+    public JSONObject addClient(ClientCreate clientCreate) {
+        String url = npsConfig.getHost() + npsConfig.getClientAddUrl();
+        Map<String, String> param = getAuthKey();
+        param.putAll(clientCreate.toMap());
+        try {
+            String response = OkHttpUtils.postResponseForm(url, param);
+            JSONObject jsonObject = JSONObject.parseObject(response);
+            return jsonObject;
+        } catch (Exception e) {
+            log.error("客户端创建失败:{} {}", e.getMessage(), e.getStackTrace());
+        }
+        return null;
     }
 
     /**
