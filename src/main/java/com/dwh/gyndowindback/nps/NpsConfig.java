@@ -13,6 +13,7 @@ public class NpsConfig {
     private String host;
     private String clientAddUrl;
     private String clientDelUrl;
+    private String clientGetUrl;
     private String tunnelGetUrl;
     private String tunnelAddUrl;
     private String tunnelEditUrl;
