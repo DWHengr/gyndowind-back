@@ -10,18 +10,18 @@ import java.util.Map;
 @Data
 @Slf4j
 public class ClientCreate {
-    private String Remark;
-    private String U;
-    private String P;
-    private String Limit;
-    private String VKey;
-    private String ConfigConnAllow;
-    private String Compress;
-    private String Crypt;
-    private String RateLimit;
-    private String FlowLimit;
-    private String MaxConn;
-    private String MaxTunnel;
+    private String remark;
+    private String u;
+    private String p;
+    private String limit;
+    private String vKey;
+    private String config_conn_allow;
+    private String compress;
+    private String crypt;
+    private String rate_limit;
+    private String flow_limit;
+    private String max_conn;
+    private String max_tunnel;
 
     public Map<String, String> toMap() {
         Map<String, String> map = new HashMap<>();

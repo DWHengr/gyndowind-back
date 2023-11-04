@@ -31,10 +31,11 @@ spring:
           local-cache-scope: session
 
 nps:
-  auth-key:
-  host:
+  auth-key: sun55kong
+  host: http://127.0.0.1:8080
   client-add-url: /client/add
   client-del-url: /client/del
+  client-get-url: /client/list
   tunnel-get-url: /index/gettunnel
   tunnel-add-url: /index/add
   tunnel-edit-url: /index/edit
