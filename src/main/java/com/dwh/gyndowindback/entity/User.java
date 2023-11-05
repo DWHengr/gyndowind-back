@@ -1,5 +1,6 @@
 package com.dwh.gyndowindback.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -50,11 +51,11 @@ public class User implements Serializable {
     @TableField("nps_client_id")
     private String npsClientId;
 
-    @TableField("create_time")
-    private Long createTime;
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private String createTime;
 
-    @TableField("update_time")
-    private Long updateTime;
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private String updateTime;
 
 
 }

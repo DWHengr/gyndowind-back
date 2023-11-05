@@ -1,8 +1,10 @@
 package com.dwh.gyndowindback.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.dwh.gyndowindback.annotation.UrlFree;
 import com.dwh.gyndowindback.service.UserService;
 import com.dwh.gyndowindback.vo.CreateUserVo;
+import com.dwh.gyndowindback.vo.LoginVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +21,13 @@ public class UserController {
 
     @Resource
     UserService userService;
+
+    @UrlFree
+    @PostMapping("/login")
+    public Object login(@RequestBody LoginVo loginVo) {
+        JSONObject result = userService.validateLogin(loginVo);
+        return result;
+    }
 
     /**
      * 新建用户

@@ -11,8 +11,10 @@ import com.dwh.gyndowindback.nps.NpsService;
 import com.dwh.gyndowindback.nps.entity.ClientCreate;
 import com.dwh.gyndowindback.service.UserService;
 import com.dwh.gyndowindback.utils.IdUtil;
+import com.dwh.gyndowindback.utils.JwtUtil;
 import com.dwh.gyndowindback.utils.ResultUtil;
 import com.dwh.gyndowindback.vo.CreateUserVo;
+import com.dwh.gyndowindback.vo.LoginVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -64,5 +66,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         } else {
             throw new GyndowindException("账号创建失败~").param("account", createUserVo.getAccount());
         }
+    }
+
+    @Override
+    public JSONObject validateLogin(LoginVo loginVo) {
+        // 获取用户
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper();
+        queryWrapper.eq(User::getAccount, loginVo.getAccount());
+        User user = getOne(queryWrapper);
+        if (null == user) {
+            return ResultUtil.Fail("用户名错误~");
+        }
+        if (!user.getPassword().equals(loginVo.getPassword())) {
+            return ResultUtil.Fail("密码错误~");
+        }
+        JSONObject userinfo = new JSONObject();
+        userinfo.put("userId", user.getId());
+        userinfo.put("account", user.getAccount());
+        userinfo.put("username", user.getName());
+        userinfo.put("phone", user.getPhone());
+        userinfo.put("email", user.getEmail());
+        //生成用户token
+        userinfo.put("token", JwtUtil.createToken(userinfo));
+        return ResultUtil.Succeed(userinfo);
     }
 }
