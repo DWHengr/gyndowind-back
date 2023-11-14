@@ -15,4 +15,6 @@ public interface UserService extends IService<User> {
     JSONObject createUser(CreateUserVo createUserVo);
 
     JSONObject validateLogin(LoginVo loginVo);
+
+    JSONObject getTunnelList(String userid);
 }

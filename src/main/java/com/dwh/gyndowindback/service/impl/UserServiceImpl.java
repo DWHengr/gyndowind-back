@@ -9,6 +9,7 @@ import com.dwh.gyndowindback.exception.GyndowindException;
 import com.dwh.gyndowindback.mapper.UserMapper;
 import com.dwh.gyndowindback.nps.NpsService;
 import com.dwh.gyndowindback.nps.entity.ClientCreate;
+import com.dwh.gyndowindback.nps.entity.Tunnel;
 import com.dwh.gyndowindback.service.UserService;
 import com.dwh.gyndowindback.utils.IdUtil;
 import com.dwh.gyndowindback.utils.JwtUtil;
@@ -18,6 +19,7 @@ import com.dwh.gyndowindback.vo.LoginVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**
@@ -90,5 +92,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //生成用户token
         userinfo.put("token", JwtUtil.createToken(userinfo));
         return ResultUtil.Succeed(userinfo);
+    }
+
+    @Override
+    public JSONObject getTunnelList(String userid) {
+        try {
+            User user = getById(userid);
+            List<Tunnel> tcp = npsService.getIndexByClientIdAndType(user.getNpsClientId(), "tcp");
+            return ResultUtil.Succeed(tcp);
+        } catch (Exception e) {
+            return ResultUtil.Fail("隧道获取失败~");
+        }
     }
 }
