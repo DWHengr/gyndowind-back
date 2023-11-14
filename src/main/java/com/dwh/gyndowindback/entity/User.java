@@ -42,8 +42,8 @@ public class User implements Serializable {
     @TableField("email")
     private String email;
 
-    @TableField("portrait")
-    private String portrait;
+    @TableField("avatar")
+    private String avatar;
 
     @TableField("status")
     private String status;

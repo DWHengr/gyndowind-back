@@ -8,7 +8,7 @@ CREATE TABLE `user`
     `sex`           varchar(64)  default NULL COMMENT '性别',
     `phone`         varchar(64)  default NULL COMMENT '手机号',
     `email`         varchar(200) default NULL COMMENT '邮箱',
-    `portrait`      text         default NULL COMMENT '头像',
+    `avatar`        text         default NULL COMMENT '头像',
     `status`        varchar(64) COMMENT '用户状态',
     `nps_client_id` varchar(64) COMMENT 'nps客户端Id',
     `create_time`   varchar(64)  DEFAULT 0 COMMENT '创建时间',
