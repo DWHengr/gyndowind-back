@@ -89,6 +89,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userinfo.put("phone", user.getPhone());
         userinfo.put("email", user.getEmail());
         userinfo.put("avatar", user.getAvatar());
+        userinfo.put("serviceIp", npsService.getServiceIp());
         //生成用户token
         userinfo.put("token", JwtUtil.createToken(userinfo));
         return ResultUtil.Succeed(userinfo);

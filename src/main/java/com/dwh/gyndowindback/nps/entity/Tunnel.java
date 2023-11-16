@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class Tunnel {
+    private int Id;
     private int Port;
     private String ServerIp;
     private String Mode;

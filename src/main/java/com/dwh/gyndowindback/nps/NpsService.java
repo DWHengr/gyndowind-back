@@ -15,6 +15,8 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @Slf4j
@@ -22,6 +24,22 @@ public class NpsService {
 
     @Resource
     NpsConfig npsConfig;
+
+    /**
+     * 获取nps服务ip
+     *
+     * @return
+     */
+    public String getServiceIp() {
+        String regex = "https?://(\\d+\\.\\d+\\.\\d+\\.\\d+):\\d+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(npsConfig.getHost());
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return "";
+    }
+
 
     /**
      * 获取nps auth key
