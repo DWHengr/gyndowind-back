@@ -51,6 +51,7 @@ public class Tunnel {
         private boolean ConfigConnAllow;
         private int MaxTunnelNum;
         private String Version;
+        private String id;
 
         @Data
         public static class Cnf {
