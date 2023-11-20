@@ -152,11 +152,11 @@ public class OkHttpUtils {
      * @param params
      * @return
      */
-    public static String postResponseForm(String url, Map<String, String> params) {
+    public static String postResponseForm(String url, Map<String, Object> params) {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         if (params != null) {
             for (String key : params.keySet()) {
-                builder.addFormDataPart(key, params.get(key));
+                builder.addFormDataPart(key, params.get(key).toString());
             }
         }
         RequestBody body = builder.build();
