@@ -41,3 +41,4 @@ nps:
   tunnel-edit-url: /index/edit
   tunnel-del-url: /index/del
   tunnel-stop-url: /index/stop
+  tunnel-start-url: /index/start

@@ -19,4 +19,5 @@ public class NpsConfig {
     private String tunnelEditUrl;
     private String tunnelDelUrl;
     private String tunnelStopUrl;
+    private String tunnelStartUrl;
 }
