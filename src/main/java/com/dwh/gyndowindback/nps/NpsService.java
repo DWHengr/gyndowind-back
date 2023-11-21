@@ -169,4 +169,25 @@ public class NpsService {
         }
         return false;
     }
+
+    /**
+     * 停止隧道
+     */
+    public boolean stopTunnel(String indexId) {
+        String url = npsConfig.getHost() + npsConfig.getTunnelStopUrl();
+        Map<String, Object> param = getAuthKey();
+        param.put("id", indexId);
+        try {
+            String response = OkHttpUtils.postResponseForm(url, param);
+            JSONObject jsonObject = JSONObject.parseObject(response);
+            if (null != jsonObject) {
+                if (jsonObject.getInteger("status") == 1) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            log.error("隧道停止失败:{} {}", e.getMessage(), e.getStackTrace());
+        }
+        return false;
+    }
 }
