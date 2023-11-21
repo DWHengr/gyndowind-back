@@ -57,7 +57,20 @@ public class TunnelServiceImpl implements TunnelService {
             boolean flag = npsService.stopTunnel(tunnelId);
             return ResultUtil.ResultByFlag(flag);
         } catch (Exception e) {
-            return ResultUtil.Fail("隧道修改失败~");
+            return ResultUtil.Fail("隧道停止失败~");
+        }
+    }
+
+    @Override
+    public JSONObject startTunnel(String tunnelId) {
+        try {
+            if (StringUtils.isBlank(tunnelId)) {
+                return ResultUtil.Fail("隧道不能为空~");
+            }
+            boolean flag = npsService.startTunnel(tunnelId);
+            return ResultUtil.ResultByFlag(flag);
+        } catch (Exception e) {
+            return ResultUtil.Fail("隧道启动失败~");
         }
     }
 }

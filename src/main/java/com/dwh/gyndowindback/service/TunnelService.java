@@ -10,4 +10,6 @@ public interface TunnelService {
     JSONObject editTunnel(String userid, EditClient editClient);
 
     JSONObject stopTunnel(String tunnelId);
+
+    JSONObject startTunnel(String tunnelId);
 }
