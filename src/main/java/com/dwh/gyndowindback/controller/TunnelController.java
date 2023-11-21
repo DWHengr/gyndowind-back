@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dwh.gyndowindback.annotation.Userid;
 import com.dwh.gyndowindback.nps.entity.EditClient;
 import com.dwh.gyndowindback.service.TunnelService;
+import com.dwh.gyndowindback.vo.StopTunnelVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,12 @@ public class TunnelController {
     @PostMapping("/edit")
     public Object editTunnel(@Userid String userid, @Valid @RequestBody EditClient editClient) {
         JSONObject result = tunnelService.editTunnel(userid, editClient);
+        return result;
+    }
+
+    @PostMapping("/stop")
+    public Object stopTunnel(@RequestBody StopTunnelVo stopTunnelVo) {
+        JSONObject result = tunnelService.stopTunnel(stopTunnelVo.tunnelId);
         return result;
     }
 }

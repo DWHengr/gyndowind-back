@@ -8,6 +8,7 @@ import com.dwh.gyndowindback.nps.entity.Tunnel;
 import com.dwh.gyndowindback.service.TunnelService;
 import com.dwh.gyndowindback.service.UserService;
 import com.dwh.gyndowindback.utils.ResultUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,6 +42,19 @@ public class TunnelServiceImpl implements TunnelService {
                 return ResultUtil.Fail("只能修改自己所拥有的隧道~");
             }
             boolean flag = npsService.editTunnel(editClient);
+            return ResultUtil.ResultByFlag(flag);
+        } catch (Exception e) {
+            return ResultUtil.Fail("隧道修改失败~");
+        }
+    }
+
+    @Override
+    public JSONObject stopTunnel(String tunnelId) {
+        try {
+            if (StringUtils.isBlank(tunnelId)) {
+                return ResultUtil.Fail("隧道不能为空~");
+            }
+            boolean flag = npsService.stopTunnel(tunnelId);
             return ResultUtil.ResultByFlag(flag);
         } catch (Exception e) {
             return ResultUtil.Fail("隧道修改失败~");
