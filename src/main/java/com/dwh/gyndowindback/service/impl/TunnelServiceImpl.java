@@ -73,4 +73,17 @@ public class TunnelServiceImpl implements TunnelService {
             return ResultUtil.Fail("隧道启动失败~");
         }
     }
+
+    @Override
+    public JSONObject delTunnel(String tunnelId) {
+        try {
+            if (StringUtils.isBlank(tunnelId)) {
+                return ResultUtil.Fail("隧道不能为空~");
+            }
+            boolean flag = npsService.delTunnel(tunnelId);
+            return ResultUtil.ResultByFlag(flag);
+        } catch (Exception e) {
+            return ResultUtil.Fail("隧道删除失败~");
+        }
+    }
 }

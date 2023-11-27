@@ -208,4 +208,22 @@ public class NpsService {
         }
         return false;
     }
+
+    public boolean delTunnel(String indexId) {
+        String url = npsConfig.getHost() + npsConfig.getTunnelDelUrl();
+        Map<String, Object> param = getAuthKey();
+        param.put("id", indexId);
+        try {
+            String response = OkHttpUtils.postResponseForm(url, param);
+            JSONObject jsonObject = JSONObject.parseObject(response);
+            if (null != jsonObject) {
+                if (jsonObject.getInteger("status") == 1) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            log.error("隧道删除失败:{} {}", e.getMessage(), e.getStackTrace());
+        }
+        return false;
+    }
 }
