@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dwh.gyndowindback.annotation.Userid;
 import com.dwh.gyndowindback.nps.entity.EditClient;
 import com.dwh.gyndowindback.service.TunnelService;
+import com.dwh.gyndowindback.vo.DelTunnelVo;
 import com.dwh.gyndowindback.vo.StartTunnelVo;
 import com.dwh.gyndowindback.vo.StopTunnelVo;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,13 @@ public class TunnelController {
     @PostMapping("/start")
     public Object startTunnel(@RequestBody StartTunnelVo startTunnelVo) {
         JSONObject result = tunnelService.startTunnel(startTunnelVo.tunnelId);
+        return result;
+    }
+
+
+    @PostMapping("/del")
+    public Object delTunnel(@RequestBody DelTunnelVo delTunnelVo) {
+        JSONObject result = tunnelService.delTunnel(delTunnelVo.tunnelId);
         return result;
     }
 }

@@ -12,4 +12,6 @@ public interface TunnelService {
     JSONObject stopTunnel(String tunnelId);
 
     JSONObject startTunnel(String tunnelId);
+
+    JSONObject delTunnel(String tunnelId);
 }
