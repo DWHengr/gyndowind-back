@@ -9,7 +9,7 @@ import com.dwh.gyndowindback.exception.GyndowindException;
 import com.dwh.gyndowindback.mapper.UserMapper;
 import com.dwh.gyndowindback.nps.NpsService;
 import com.dwh.gyndowindback.nps.entity.ClientCreate;
-import com.dwh.gyndowindback.nps.entity.Tunnel;
+import com.dwh.gyndowindback.nps.entity.ClientList;
 import com.dwh.gyndowindback.service.UserService;
 import com.dwh.gyndowindback.utils.IdUtil;
 import com.dwh.gyndowindback.utils.JwtUtil;
@@ -94,4 +94,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return ResultUtil.Succeed(userinfo);
     }
 
+    @Override
+    public JSONObject clientStatus(String userId) {
+        ClientList clients = npsService.getClientListBySearch(userId);
+        if (null != clients.getRows() && clients.getRows().size() > 0) {
+            return ResultUtil.Succeed(clients);
+        }
+        return ResultUtil.Fail("客户端不存在~");
+    }
 }

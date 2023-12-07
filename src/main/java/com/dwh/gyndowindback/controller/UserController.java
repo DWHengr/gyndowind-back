@@ -2,6 +2,7 @@ package com.dwh.gyndowindback.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dwh.gyndowindback.annotation.UrlFree;
+import com.dwh.gyndowindback.annotation.Userid;
 import com.dwh.gyndowindback.service.UserService;
 import com.dwh.gyndowindback.vo.CreateUserVo;
 import com.dwh.gyndowindback.vo.LoginVo;
@@ -37,5 +38,13 @@ public class UserController {
     public Object createRoom(@Valid @RequestBody CreateUserVo createRoomVo) {
         log.info("新建用户：{}", createRoomVo);
         return userService.createUser(createRoomVo);
+    }
+
+    /**
+     * 客户端状态
+     */
+    @PostMapping("/client/status")
+    public Object clientStatus(@Userid String userId) {
+        return userService.clientStatus(userId);
     }
 }

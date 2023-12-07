@@ -3,10 +3,7 @@ package com.dwh.gyndowindback.nps;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.dwh.gyndowindback.nps.entity.Client;
-import com.dwh.gyndowindback.nps.entity.ClientCreate;
-import com.dwh.gyndowindback.nps.entity.EditClient;
-import com.dwh.gyndowindback.nps.entity.Tunnel;
+import com.dwh.gyndowindback.nps.entity.*;
 import com.dwh.gyndowindback.utils.MD5Util;
 import com.dwh.gyndowindback.utils.OkHttpUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -82,6 +79,29 @@ public class NpsService {
         return null;
     }
 
+    /**
+     * 客户端查询
+     */
+    public ClientList getClientListBySearch(String search) {
+        String url = npsConfig.getHost() + npsConfig.getClientGetUrl();
+        Map<String, Object> param = getAuthKey();
+        param.put("order", "asc");
+        param.put("offset", "0");
+        param.put("limit", "999");
+        param.put("search", search);
+        try {
+            String response = OkHttpUtils.postResponseForm(url, param);
+            JSONObject jsonObject = JSONObject.parseObject(response);
+            if (null != jsonObject) {
+                ClientList clientList = jsonObject.toJavaObject(ClientList.class);
+                return clientList;
+            }
+        } catch (Exception e) {
+            log.error("客户端列表获取失败:{} {}", e.getMessage(), e.getStackTrace());
+        }
+        return null;
+    }
+
 
     /**
      * 客户端创建
@@ -130,8 +150,7 @@ public class NpsService {
         param.put("type", type);
         param.put("offset", "0");
         param.put("limit", "999");
-        if (null != clientId)
-            param.put("client_id", clientId);
+        if (null != clientId) param.put("client_id", clientId);
         try {
             String response = OkHttpUtils.postResponseForm(url, param);
             JSONObject jsonObject = JSONObject.parseObject(response);
